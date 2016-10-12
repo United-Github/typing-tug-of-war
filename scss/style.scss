@@ -30,6 +30,12 @@ p {
   line-height: 100px;
   font-size: 40px;
   margin: 50px auto;
+  .touched-letter {
+    color: $gray;
+  }
+  .untouched-letter {
+    color: $black;
+  }
 }
 
 .playground {
