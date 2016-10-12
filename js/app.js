@@ -4,15 +4,15 @@ var wordList = ['value', 'version', 'export', 'import', 'input', 'document', 'va
 // TARGET DOM
 var wordArea = document.querySelector('#js-word');
 
-document.addEventListener('keydown', function() {
-  checkType(event.key);
-});
-
 var nowWord = 'programming'; // 現在出題中の単語
 var nowCorrect = 0; // 現在の正答文字数（現在押すべきキーに相当する）
 
+document.addEventListener('keydown', function(event) {
+  checkType(event.key);
+});
+
 function checkType(downedkey) {
-  if ( downedkey == nowWord.charAt(nowCorrect) ) {
+  if (downedkey == nowWord.charAt(nowCorrect)) {
     paintColor();
     if (nowWord.length == nowCorrect) {
       changeWord();
@@ -22,23 +22,18 @@ function checkType(downedkey) {
   }
 }
 
-// 打鍵済みのキーに色を塗る！
 function paintColor () {
   nowCorrect++; // 正答文字数のカウントUP
 
-  // 既打鍵のDOMを生成
   var touchedLetter = document.createElement('span');
   touchedLetter.className = 'touched-letter';
   touchedLetter.textContent = nowWord.substr(0,nowCorrect);
-  // 未打鍵のDOMを生成
   var untouchedLetter = document.createElement('span');
   untouchedLetter.className = 'untouched-letter';
   untouchedLetter.textContent = nowWord.substr(nowCorrect, nowWord.length);
 
-  // 一旦、空に
   wordArea.textContent = null;
 
-  // 打鍵を更新
   wordArea.appendChild(touchedLetter);
   wordArea.appendChild(untouchedLetter);
 }
