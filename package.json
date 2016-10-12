@@ -1,0 +1,25 @@
+{
+  "name": "mojs-demo",
+  "version": "1.0.0",
+  "description": "mo.jsを使って、Webページのローディングに使えそうなアニメーションを実装してみる。",
+  "main": "index.js",
+  "devDependencies": {
+    "node-sass": "^3.7.0"
+  },
+  "scripts": {
+    "watch": "npm run watch-scss & npm run start",
+    "build": "node-sass ./scss --output ./css",
+    "watch-scss": "node-sass ./scss --output ./css -w",
+    "start": "python -m SimpleHTTPServer 8000"
+  },  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mtmtkzm/mojs-demo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mtmtkzm/mojs-demo/issues"
+  },
+  "homepage": "https://github.com/mtmtkzm/mojs-demo#readme"
+}
