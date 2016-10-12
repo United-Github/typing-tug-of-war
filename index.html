@@ -1,12 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="jp">
 <head>
   <meta charset="UTF-8">
   <title>タイピング綱引き</title>
   <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-  <h1>タイピング綱引きするやで</h1>
+  <h1 class="game-title">タイピング綱引きするやで</h1>
+
+  <div class="words-area">
+    <span id="js-word">programming</span>
+  </div>
+
+  <div class="playground">
+    <p>とりあえずここの幅が変わればいいんじゃないですかね</p>
+    <div class="playground-tug">
+      <div class="tug red-tug"></div>
+      <div class="tug blue-tug"></div>
+    </div>
+  </div>
+
   <script src="./js/app.js"></script>
 </body>
 </html>
