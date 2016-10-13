@@ -3,22 +3,39 @@ var wordList = ['piyo', 'huga', 'hoge', 'network', 'oracle', 'environment', 'ins
 
 // TARGET DOM
 var wordArea = document.querySelector('#js-word');
+var westTug = document.querySelector('#js-red-tug');
+var eastTug = document.querySelector('#js-blue-tug');
 
 var nowWord = 'programming'; // 現在出題中の単語
 var nowCorrect = 0; // 現在の正答文字数（現在押すべきキーに相当する）
 
-document.addEventListener('keydown', function(event) {
-  checkType(event.key);
-});
+var westForce = 50; // 相手：西軍の強さ（幅[%]）
+var eastForce = 50; // 自分：東軍の強さ（幅[%]）
+
+function npcAttach (force) {
+  westForce += force;
+}
+
+// チーム戦＆リアルタイムをキー押下ごとにやると描画がなんか辛そうな気がスルので100ms毎に幅を更新
+function myAttack() {
+  npcAttach(1); // 擬似的に敵のタイピングを表現
+
+  var width = Math.floor( ( 100/(westForce + eastForce) ) * westForce );
+  console.log(westForce, eastForce, width);
+
+  westTug.style.width = width + '%';
+  eastTug.style.width = (100 - width) + '%';
+}
+
+setInterval(myAttack, 100);
 
 function checkType(downedkey) {
   if (downedkey == nowWord.charAt(nowCorrect)) {
     paintColor();
-    if (nowWord.length == nowCorrect) {
-      changeWord();
-    }
+    eastForce+=3;
+    if (nowWord.length == nowCorrect) changeWord();
   } else {
-    console.log('やり直し！正解は:', nowWord.charAt(nowCorrect));
+    // タイプミス時
   }
 }
 
@@ -44,3 +61,8 @@ function changeWord() {
   var word = Math.floor(Math.random() * wordList.length);
   wordArea.textContent = nowWord = wordList[word];
 }
+
+// キー押下のイベントリスナー
+document.addEventListener('keydown', function(event) {
+  checkType(event.key);
+});
