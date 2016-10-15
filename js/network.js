@@ -25,7 +25,7 @@ function tugOfWar() {
 		this.usersList = snapshot.val();
 	});
 
-	// プレイヤーログイン
+	// プレイヤーログイン(番号(0~3)、名前)
 	this.loginPlayer = function (index, name) {
 		if (index < 0 && 3 < index) return false;
 		if (usersList[index] !== "") return false;
@@ -34,11 +34,26 @@ function tugOfWar() {
 		user.set(usersList);
 		return true;
 	}
+
+	// プレイヤーログアウト
+	this.logoutPlayer = function () {
+		if (userIndex !== -1) {
+			usersList[userIndex] = "";
+			userIndex = -1;
+			user.set(usersList);
+			return true;
+		} 
+		return false;
+	}
 }
+
 $(function (){
 	var game = new tugOfWar();
-	$(".js_Check").on("click", function() {
+	$(".js_Click").on("click", function() {
 		console.log(game.loginPlayer(1,"tanaka"));
+	});
+	$(".js_Check").on("click", function() {
+		console.log(game.logoutPlayer());
 	});
 })
 main();
