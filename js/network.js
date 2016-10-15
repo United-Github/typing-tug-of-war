@@ -14,10 +14,12 @@ var main = function(){
 
 // firebase
 function tugOfWar() {
-	var user = new Firebase("https://tug-of-war-adba1.firebaseio.com/user/");
+	var user = new Firebase("https://tug-of-war-adba1.firebaseio.com/user");
 	var userIndex = -1;
-	var usersList = null;
-	var typing = new Firebase("https://tug-of-war-adba1.firebaseio.com/typing/");
+	var usersList = [];
+
+	var typing = new Firebase("https://tug-of-war-adba1.firebaseio.com/typing/total");
+	var typingList = [];
 
 	// userListを取得
 	user.on("value", function(snapshot) {
@@ -25,8 +27,19 @@ function tugOfWar() {
 	});
 	// // 変更時の処理
 	user.on("child_changed", function(snapshot) {
-		this.usersList = snapshot.val();
+		usersList = snapshot.val();
 	});
+
+	// typingListを取得
+	typing.on("value", function(snapshot) {
+		typingList = snapshot.val();
+		console.log(typingList);
+	});
+	// // 変更時の処理
+	typing.on("child_changed", function(snapshot) {
+		typingList = snapshot.val();
+	});
+
 
 	// プレイヤーログイン(番号(0~3)、名前)
 	this.loginPlayer = function (index, name) {
@@ -34,7 +47,9 @@ function tugOfWar() {
 		if (usersList[index] !== "") return false;
 		userIndex = index;
 		usersList[index] = userName = name;
+		typingList[index] = 0;
 		user.update({[index] : name});
+		typing.update({[index]:0});
 		return true;
 	}
 
@@ -42,6 +57,7 @@ function tugOfWar() {
 	this.logoutPlayer = function () {
 		if (userIndex !== -1) {
 			user.update({[userIndex] : ""});
+			typing.update({[index]:0});
 			usersList[userIndex] = "";
 			userIndex = -1;
 			return true;
@@ -49,7 +65,7 @@ function tugOfWar() {
 		return false;
 	}
 
-	// 
+
 }
 
 $(function (){
