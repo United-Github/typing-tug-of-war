@@ -14,15 +14,13 @@ var main = function(){
 
 // firebase
 function tugOfWar() {
-	this.initialize = function() {
-		this.user = new Firebase("https://tug-of-war-adba1.firebaseio.com/user/");
-		this.userIndex = -1;
-		// userListの初期化
-		user.on("value", function(snapshot) {
-			this.usersList = snapshot.val();
-		});
-	}
-	// 変更時の処理
+	var user = new Firebase("https://tug-of-war-adba1.firebaseio.com/user/");
+	var userIndex = -1;
+	var usersList = null;
+	user.on("value", function(snapshot) {
+		usersList = snapshot.val();
+	});
+	// // 変更時の処理
 	user.on("child_changed", function(snapshot) {
 		this.usersList = snapshot.val();
 	});
@@ -30,15 +28,17 @@ function tugOfWar() {
 	// プレイヤーログイン
 	this.loginPlayer = function (index, name) {
 		if (index < 0 && 3 < index) return false;
-		if (this.usersList[userIndex] === "") return false;
-		this.userIndex = index;
-		this.usersList[userIndex] = userName = name;
-		user.set(usersName);
+		if (usersList[index] !== "") return false;
+		userIndex = index;
+		usersList[index] = userName = name;
+		user.set(usersList);
 		return true;
 	}
 }
 $(function (){
 	var game = new tugOfWar();
-	game.initialize();
+	$(".js_Check").on("click", function() {
+		console.log(game.loginPlayer(1,"tanaka"));
+	});
 })
 main();
