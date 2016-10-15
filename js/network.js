@@ -17,6 +17,9 @@ function tugOfWar() {
 	var user = new Firebase("https://tug-of-war-adba1.firebaseio.com/user/");
 	var userIndex = -1;
 	var usersList = null;
+	var typing = new Firebase("https://tug-of-war-adba1.firebaseio.com/typing/");
+
+	// userListを取得
 	user.on("value", function(snapshot) {
 		usersList = snapshot.val();
 	});
@@ -31,20 +34,22 @@ function tugOfWar() {
 		if (usersList[index] !== "") return false;
 		userIndex = index;
 		usersList[index] = userName = name;
-		user.set(usersList);
+		user.update({[index] : name});
 		return true;
 	}
 
 	// プレイヤーログアウト
 	this.logoutPlayer = function () {
 		if (userIndex !== -1) {
+			user.update({[userIndex] : ""});
 			usersList[userIndex] = "";
 			userIndex = -1;
-			user.set(usersList);
 			return true;
 		} 
 		return false;
 	}
+
+	// 
 }
 
 $(function (){
