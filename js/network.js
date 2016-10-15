@@ -40,6 +40,11 @@ function tugOfWar() {
 		typingList = snapshot.val();
 	});
 
+	// 削除時
+	$(window).bind("beforeunload", function(e) {
+		game.logoutPlayer();
+		return ;
+	});
 
 	// プレイヤーログイン(番号(0~3)、名前)
 	this.loginPlayer = function (index, name) {
@@ -64,7 +69,6 @@ function tugOfWar() {
 		} 
 		return false;
 	}
-
 
 }
 
