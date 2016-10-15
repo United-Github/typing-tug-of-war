@@ -21,7 +21,9 @@ function myAttack() {
   npcAttach(2); // 擬似的に敵のタイピングを表現
 
   var width = Math.floor( ( 100/(westForce + eastForce) ) * westForce );
-  console.log(westForce, eastForce, width);
+  if ( width < 0 || width > 100 ) {
+    gameOver();
+  }
 
   westTug.style.width = width + '%';
   eastTug.style.width = (100 - width) + '%';
@@ -60,6 +62,10 @@ function changeWord() {
   nowCorrect = 0; // 正答文字数のカウンターを元に戻す
   var word = Math.floor(Math.random() * wordList.length);
   wordArea.textContent = nowWord = wordList[word];
+}
+
+function gameOver() {
+  console.log('ゲームオーバ！');
 }
 
 // キー押下のイベントリスナー
