@@ -12,4 +12,16 @@ var main = function(){
 	// var hoge = '1';
 }
 
+// firebase
+function tugOfWar() {
+	this.initialize = function() {
+		this.user = new Firebase("https://tug-of-war-adba1.firebaseio.com/user/");
+		this.userIndex = -1;
+		this.userName = "";
+	}
+}
+$(function (){
+	var game = new tugOfWar();
+	game.initialize();
+})
 main();
