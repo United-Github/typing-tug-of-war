@@ -17,7 +17,24 @@ function tugOfWar() {
 	this.initialize = function() {
 		this.user = new Firebase("https://tug-of-war-adba1.firebaseio.com/user/");
 		this.userIndex = -1;
-		this.userName = "";
+		// userListの初期化
+		user.on("value", function(snapshot) {
+			this.usersList = snapshot.val();
+		});
+	}
+	// 変更時の処理
+	user.on("child_changed", function(snapshot) {
+		this.usersList = snapshot.val();
+	});
+
+	// プレイヤーログイン
+	this.loginPlayer = function (index, name) {
+		if (index < 0 && 3 < index) return false;
+		if (this.usersList[userIndex] === "") return false;
+		this.userIndex = index;
+		this.usersList[userIndex] = userName = name;
+		user.set(usersName);
+		return true;
 	}
 }
 $(function (){
