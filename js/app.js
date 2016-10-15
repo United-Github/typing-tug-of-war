@@ -18,7 +18,7 @@ function npcAttach (force) {
 
 // チーム戦＆リアルタイムをキー押下ごとにやると描画がなんか辛そうな気がスルので100ms毎に幅を更新
 function myAttack() {
-  npcAttach(1); // 擬似的に敵のタイピングを表現
+  npcAttach(2); // 擬似的に敵のタイピングを表現
 
   var width = Math.floor( ( 100/(westForce + eastForce) ) * westForce );
   console.log(westForce, eastForce, width);
@@ -27,7 +27,7 @@ function myAttack() {
   eastTug.style.width = (100 - width) + '%';
 }
 
-setInterval(myAttack, 100);
+setInterval(myAttack, 50);
 
 function checkType(downedkey) {
   if (downedkey == nowWord.charAt(nowCorrect)) {
@@ -35,7 +35,7 @@ function checkType(downedkey) {
     eastForce+=3;
     if (nowWord.length == nowCorrect) changeWord();
   } else {
-    // タイプミス時
+    eastForce-=1;
   }
 }
 
