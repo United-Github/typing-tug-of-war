@@ -94,6 +94,15 @@ function tugOfWar() {
 		return true;
 	}
 
+	// 初期化処理
+	tugOfWar.prototype.initializePlayer = function() {
+		if (this.userIndex === -1) return false;
+		this.table['typing'][this.userIndex] = 0;
+		this.table['ready'][this.userIndex] = 0;
+		this.fire['typing'].update({[this.userIndex]:0});
+		this.fire['ready'].update({[this.userIndex] : 0});
+		return true;
+	}
 	// プレイヤーのログイン(番号, ユーザー名)
 	tugOfWar.prototype.loginPlayer = function (index, name) {
 		if (this.userIndex !== -1) return false;
@@ -101,9 +110,8 @@ function tugOfWar() {
 		if (this.table['user'][index] !== "") return false;
 		this.userIndex = index;
 		this.table['user'][index] = name;
-		this.table['typing'][index] = 0;
 		this.fire['user'].update({[index] : name});
-		this.fire['typing'].update({[index]:0});
+		this.initializePlayer();
 		return true;
 	}
 	// プレイヤーのログアウト処理
@@ -137,9 +145,9 @@ $(function (){
 	$(".js_Click").on("click", function() {
 		console.log(game.getElement('user'));
 		// console.log(game.test());
-		// console.log(game.loginPlayer(1,"tanaka"));
+		console.log(game.loginPlayer(1,"tanaka"));
 	});
 	$(".js_Check").on("click", function() {
-		// console.log(game.logoutPlayer());
+		console.log(game.logoutPlayer());
 	});
 })
