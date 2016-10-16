@@ -15,6 +15,7 @@
 // firebase
 function tugOfWar() {
 
+	// Keyとvalueを取得できるforInを作成
 	Object.defineProperty(Object.prototype, "forIn", {
 		value: function(fn, self) {
 			self = self || this;
@@ -27,41 +28,72 @@ function tugOfWar() {
 		}
 	});
 
+	// 更新時のイベント関数配列(ユーザー用)
 	this.changeEvent = [];
+	// 更新時のイベント関数配列(オブジェクト内用)
+	this.changeEventForSystem = [];
+	// FireBase配列
 	this.fire = [];
+	// 取得データ配列
 	this.table = [];
+	// Userの番号
 	this.userIndex = -1;
+	// 元のURI
 	this.baseUri = "https://tug-of-war-adba1.firebaseio.com/";
 
+	// 全員が更新が変わったときのイベント
+	this.changeReadyEvent = function(ready){};
+
+	// FireBaseオブジェクトのインスタンス化
 	this.fire['user'] = new Firebase(this.baseUri + "user");
 	this.fire['typing'] = new Firebase(this.baseUri + "typing/total");
 	this.fire['ready'] = new Firebase(this.baseUri + "ready");
 
 	// fireのイベント登録
 	this.fire.forIn(function(key, value) {
-		this.changeEvent[key] = function() {};
+		
+		// コールバックイベントの初期化
+		this.changeEvent[key] = function(array) {};
+		this.changeEventForSystem[key] = function(){};
+
+		// テーブルを取得できた時のイベント登録
 		value.on("value", function(snapshot) {
 			this.table[key] = snapshot.val();
 		}.bind(this));
+		
+		// テーブルが更新された時のイベント登録
 		value.on("child_changed", function(snapshot) {
-			this.table[key] = snapshot.val();
-			this.changeEvent[key]();
+			this.table[key][snapshot.key()] = snapshot.val();
+			this.changeEvent[key](this.table[key]);
+			this.changeEventForSystem[key]();
 		}.bind(this));
+
 	}.bind(this));
 
-	// 削除時
+	// 削除時の処理
 	$(window).unload(function() {
-		console.log(this);
 		this.logoutPlayer();
 	}.bind(this));
 
+	// readyの変更時のイベント
+	this.changeEventForSystem['ready'] = function (){
+		var flag = true;
+		this.table['ready'].forEach(function(element) {
+			if (element === 0) flag = false; 
+		}, this);
+		// 全員が準備できていたらtrue
+		this.changeReadyEvent(flag);
+	}.bind(this);
+
 }
+	// チェンジイベントの登録 (データ名, イベント関数)
 	tugOfWar.prototype.setChangeEvent = function(key, func) {
 		if (this.changeEvent[key] === undefined) return false;
 		this.changeEvent[key] = func;
 		return true;
 	}
 
+	// プレイヤーのログイン(番号, ユーザー名)
 	tugOfWar.prototype.loginPlayer = function (index, name) {
 		if (this.userIndex !== -1) return false;
 		if (index < 0 && 3 < index) return false;
@@ -73,6 +105,7 @@ function tugOfWar() {
 		this.fire['typing'].update({[index]:0});
 		return true;
 	}
+	// プレイヤーのログアウト処理
 	tugOfWar.prototype.logoutPlayer = function () {
 		if (this.userIndex === -1) return false;
 			this.fire['user'].update({[this.userIndex] : ""});
@@ -80,18 +113,39 @@ function tugOfWar() {
 			this.table['user'][this.userIndex] = "";
 			this.userIndex = -1;
 			return true;
-	} 
+	}
+	// ready変更時のイベント登録(セットする関数の引数には、全員が準備できていたらtrue)
+	tugOfWar.prototype.setReadyEvent = function(func) {
+		this.changeReadyEvent = func;
+	}
+
+	// テーブル内の値の取得
+	tugOfWar.prototype.getElement = function(key) {
+		return (key in this.table) ? this.table[key] : [];
+	}
+
+	tugOfWar.prototype.test = function () {
+		return this.table;
+	}
 
 $(function (){
 	var game = new tugOfWar();
-	game.setChangeEvent('ready', function(){
-		console.log('changeEvent');
+	game.setChangeEvent('user', function(value){
+		console.log(value);
+	});
+	game.setChangeEvent('typing', function(value){
+		console.log(value);
+	});
+	game.setReadyEvent(function(ready){
+		console.log(ready);
 	});
 	$(".js_Click").on("click", function() {
-		console.log(game.loginPlayer(1,"tanaka"));
+		console.log(game.getElement('user'));
+		// console.log(game.test());
+		// console.log(game.loginPlayer(1,"tanaka"));
 	});
 	$(".js_Check").on("click", function() {
-		console.log(game.logoutPlayer());
+		// console.log(game.logoutPlayer());
 	});
 })
 // main();
