@@ -43,15 +43,17 @@ p {
   .playground-tug {
     font-size: 0;
     .tug {
-      width: 50vw;
       height: 30px;
       font-size: 1rem;
       display: inline-block;
       vertical-align: top;
+      transition: all .2s;
       &.red-tug {
+        width: 50vw;
         background-color: $red;
       }
       &.blue-tug {
+        width: 50vw;
         background-color: $blue;
       }
     }

@@ -30,12 +30,14 @@ p {
   .playground .playground-tug {
     font-size: 0; }
     .playground .playground-tug .tug {
-      width: 50vw;
       height: 30px;
       font-size: 1rem;
       display: inline-block;
-      vertical-align: top; }
+      vertical-align: top;
+      transition: all .2s; }
       .playground .playground-tug .tug.red-tug {
+        width: 50vw;
         background-color: #ed2a6b; }
       .playground .playground-tug .tug.blue-tug {
+        width: 50vw;
         background-color: #2a71ed; }
