@@ -53,7 +53,7 @@ function tugOfWar() {
 	this.fire.forIn(function(key, value) {
 		
 		// コールバックイベントの初期化
-		this.changeEvent[key] = function(array) {};
+		this.changeEvent[key] = function(array, updateKey) {};
 		this.changeEventForSystem[key] = function(){};
 
 		// テーブルを取得できた時のイベント登録
@@ -64,7 +64,7 @@ function tugOfWar() {
 		// テーブルが更新された時のイベント登録
 		value.on("child_changed", function(snapshot) {
 			this.table[key][snapshot.key()] = snapshot.val();
-			this.changeEvent[key](this.table[key]);
+			this.changeEvent[key](this.table[key],snapshot.key());
 			this.changeEventForSystem[key]();
 		}.bind(this));
 
@@ -84,6 +84,7 @@ function tugOfWar() {
 		// 全員が準備できていたらtrue
 		this.changeReadyEvent(flag);
 	}.bind(this);
+
 
 }
 	// チェンジイベントの登録 (データ名, イベント関数)
@@ -130,14 +131,8 @@ function tugOfWar() {
 
 $(function (){
 	var game = new tugOfWar();
-	game.setChangeEvent('user', function(value){
-		console.log(value);
-	});
-	game.setChangeEvent('typing', function(value){
-		console.log(value);
-	});
-	game.setReadyEvent(function(ready){
-		console.log(ready);
+	game.setChangeEvent('user', function(array, updateKey){
+		console.log(array, updateKey);
 	});
 	$(".js_Click").on("click", function() {
 		console.log(game.getElement('user'));
@@ -148,34 +143,3 @@ $(function (){
 		// console.log(game.logoutPlayer());
 	});
 })
-// main();
-// function obj () {
-// 	Object.defineProperty(Object.prototype, "forIn", {
-// 		value: function(fn, self) {
-// 			self = self || this;
-
-// 			Object.keys(this).forEach(function(key, index) {
-// 				var value = this[key];
-
-// 				fn.call(self, key, value);
-// 			}, this);
-// 		}
-// 	});
-
-// 	// fireのイベント登録
-// 	this.array = {'test':'aaa'};
-// 	var that = this;
-// 	this.array.forIn(function(key, value) {
-// 		console.log(that.array);
-// 	});
-// }
-// obj.prototype.test = function (){
-
-// 	console.log('fda');
-// };
-
-// $(function(){
-// 	var ins = new obj;
-// 	ins.test();
-// 	console.log(ins.array);
-// });
