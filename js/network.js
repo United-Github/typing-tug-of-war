@@ -118,8 +118,8 @@ function tugOfWar() {
 	tugOfWar.prototype.logoutPlayer = function () {
 		if (this.userIndex === -1) return false;
 			this.fire['user'].update({[this.userIndex] : ""});
-			this.fire['typing'].update({[this.userIndex]:0});
 			this.table['user'][this.userIndex] = "";
+			this.initializePlayer();
 			this.userIndex = -1;
 			return true;
 	}
@@ -133,8 +133,13 @@ function tugOfWar() {
 		return (key in this.table) ? this.table[key] : [];
 	}
 
-	tugOfWar.prototype.test = function () {
-		return this.table;
+	// 準備状態のセッター
+	tugOfWar.prototype.setStatusReady = function(status) {
+		if (this.userIndex !== -1 ){
+			status = status ? 1 : 0;
+			this.table['ready'][this.userIndex] = status;
+			this.fire['ready'].update({[this.userIndex] : status});
+		}
 	}
 
 $(function (){
@@ -148,6 +153,7 @@ $(function (){
 		console.log(game.loginPlayer(1,"tanaka"));
 	});
 	$(".js_Check").on("click", function() {
-		console.log(game.logoutPlayer());
+	game.setStatusReady(true);
+		// console.log(game.logoutPlayer());
 	});
 })
