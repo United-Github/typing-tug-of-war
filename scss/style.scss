@@ -39,9 +39,9 @@ h2 {
 
 
 .ready-game {
+  position: relative;
   width: 100vw;
   height: 100vh;
-  position: relative;
   background-color: $black;
   > section {
     position: absolute;
@@ -54,7 +54,8 @@ h2 {
     height: 300px;
   }
   .enter-the-game {
-    // display: none;
+    background-color: $black;
+    z-index: 1;
     .register-name {
       text-align: center;
       font-size: 0;
@@ -98,7 +99,8 @@ h2 {
     }
   }
   .ready-fight {
-    display: none;
+    background-color: $black;
+    z-index: 0;
     .player-ready {
       display: inline-block;
       &:checked {
@@ -139,41 +141,47 @@ h2 {
   }
 }
 
-.words-area {
-  border: 10px solid $gray;
-  border-radius: 20px;
-  background-color: $white;
-  width: 750px;
-  height: 100px;
-  text-align: center;
-  line-height: 100px;
-  font-size: 40px;
-  margin: 50px auto;
-  .touched-letter {
-    color: $gray;
+.gamearea {
+  position: fixed;
+  top: 0;
+  z-index: -1;
+  width: 100%;
+  .words-area {
+    border: 10px solid $gray;
+    border-radius: 20px;
+    background-color: $white;
+    width: 750px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    font-size: 40px;
+    margin: 50px auto;
+    .touched-letter {
+      color: $gray;
+    }
+    .untouched-letter {
+      color: $black;
+    }
   }
-  .untouched-letter {
-    color: $black;
-  }
-}
 
-.playground {
-  margin-top: 200px;
-  .playground-tug {
-    font-size: 0;
-    .tug {
-      height: 30px;
-      font-size: 1rem;
-      display: inline-block;
-      vertical-align: top;
-      transition: all .2s;
-      &.red-tug {
-        width: 50vw;
-        background-color: $red;
-      }
-      &.blue-tug {
-        width: 50vw;
-        background-color: $blue;
+  .playground {
+    margin-top: 200px;
+    .playground-tug {
+      font-size: 0;
+      .tug {
+        height: 30px;
+        font-size: 1rem;
+        display: inline-block;
+        vertical-align: top;
+        transition: all .2s;
+        &.red-tug {
+          width: 50vw;
+          background-color: $red;
+        }
+        &.blue-tug {
+          width: 50vw;
+          background-color: $blue;
+        }
       }
     }
   }

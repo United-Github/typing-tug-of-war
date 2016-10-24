@@ -59,9 +59,9 @@ h2 {
   color: #fff; }
 
 .ready-game {
+  position: relative;
   width: 100vw;
   height: 100vh;
-  position: relative;
   background-color: #303E4D; }
   .ready-game > section {
     position: absolute;
@@ -72,42 +72,46 @@ h2 {
     margin: auto;
     width: 600px;
     height: 300px; }
-  .ready-game .enter-the-game .register-name {
-    text-align: center;
-    font-size: 0; }
-    .ready-game .enter-the-game .register-name .player-name {
-      display: inline-block;
-      vertical-align: bottom;
-      width: 450px;
-      height: 80px;
-      box-sizing: border-box;
-      margin-top: 40px;
-      font-size: 30px;
-      letter-spacing: .2em;
+  .ready-game .enter-the-game {
+    background-color: #303E4D;
+    z-index: 1; }
+    .ready-game .enter-the-game .register-name {
       text-align: center;
-      border: 10px solid #fff;
-      background-color: transparent;
-      color: #fff;
-      border-radius: 4px;
-      outline: 0;
-      transition: all .3s; }
-      .ready-game .enter-the-game .register-name .player-name:hover {
-        background-color: rgba(255, 255, 255, 0.1); }
-      .ready-game .enter-the-game .register-name .player-name:focus {
-        border-color: #33b490; }
-    .ready-game .enter-the-game .register-name .register-player {
-      display: inline-block;
-      vertical-align: bottom;
-      font-size: 1rem;
-      width: 80px;
-      height: 80px;
-      margin-left: 20px; }
-      .ready-game .enter-the-game .register-name .register-player:hover {
-        background-color: rgba(255, 255, 255, 0.1); }
-      .ready-game .enter-the-game .register-name .register-player:focus {
-        border-color: #33b490; }
+      font-size: 0; }
+      .ready-game .enter-the-game .register-name .player-name {
+        display: inline-block;
+        vertical-align: bottom;
+        width: 450px;
+        height: 80px;
+        box-sizing: border-box;
+        margin-top: 40px;
+        font-size: 30px;
+        letter-spacing: .2em;
+        text-align: center;
+        border: 10px solid #fff;
+        background-color: transparent;
+        color: #fff;
+        border-radius: 4px;
+        outline: 0;
+        transition: all .3s; }
+        .ready-game .enter-the-game .register-name .player-name:hover {
+          background-color: rgba(255, 255, 255, 0.1); }
+        .ready-game .enter-the-game .register-name .player-name:focus {
+          border-color: #33b490; }
+      .ready-game .enter-the-game .register-name .register-player {
+        display: inline-block;
+        vertical-align: bottom;
+        font-size: 1rem;
+        width: 80px;
+        height: 80px;
+        margin-left: 20px; }
+        .ready-game .enter-the-game .register-name .register-player:hover {
+          background-color: rgba(255, 255, 255, 0.1); }
+        .ready-game .enter-the-game .register-name .register-player:focus {
+          border-color: #33b490; }
   .ready-game .ready-fight {
-    display: none; }
+    background-color: #303E4D;
+    z-index: 0; }
     .ready-game .ready-fight .player-ready {
       display: inline-block; }
       .ready-game .ready-fight .player-ready:checked {
@@ -140,34 +144,38 @@ h2 {
         margin-left: -5px;
         transform: rotate(-45deg); }
 
-.words-area {
-  border: 10px solid #ccc;
-  border-radius: 20px;
-  background-color: #fff;
-  width: 750px;
-  height: 100px;
-  text-align: center;
-  line-height: 100px;
-  font-size: 40px;
-  margin: 50px auto; }
-  .words-area .touched-letter {
-    color: #ccc; }
-  .words-area .untouched-letter {
-    color: #303E4D; }
-
-.playground {
-  margin-top: 200px; }
-  .playground .playground-tug {
-    font-size: 0; }
-    .playground .playground-tug .tug {
-      height: 30px;
-      font-size: 1rem;
-      display: inline-block;
-      vertical-align: top;
-      transition: all .2s; }
-      .playground .playground-tug .tug.red-tug {
-        width: 50vw;
-        background-color: #ed2a6b; }
-      .playground .playground-tug .tug.blue-tug {
-        width: 50vw;
-        background-color: #2a71ed; }
+.gamearea {
+  position: fixed;
+  top: 0;
+  z-index: -1;
+  width: 100%; }
+  .gamearea .words-area {
+    border: 10px solid #ccc;
+    border-radius: 20px;
+    background-color: #fff;
+    width: 750px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    font-size: 40px;
+    margin: 50px auto; }
+    .gamearea .words-area .touched-letter {
+      color: #ccc; }
+    .gamearea .words-area .untouched-letter {
+      color: #303E4D; }
+  .gamearea .playground {
+    margin-top: 200px; }
+    .gamearea .playground .playground-tug {
+      font-size: 0; }
+      .gamearea .playground .playground-tug .tug {
+        height: 30px;
+        font-size: 1rem;
+        display: inline-block;
+        vertical-align: top;
+        transition: all .2s; }
+        .gamearea .playground .playground-tug .tug.red-tug {
+          width: 50vw;
+          background-color: #ed2a6b; }
+        .gamearea .playground .playground-tug .tug.blue-tug {
+          width: 50vw;
+          background-color: #2a71ed; }

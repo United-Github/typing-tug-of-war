@@ -13,8 +13,8 @@
 </head>
 
 <body>
-  <section class="ready-game">
-    <section class="enter-the-game js-enter">
+  <section id="js-game-ready" class="ready-game">
+    <section id="js-enter" class="enter-the-game">
       <h2>Your name ?</h2>
       <div class="register-name">
         <input class="player-name" id="player-name" type="text" name="name" autocomplete="off">
@@ -24,7 +24,7 @@
         <input style="display: none;" id="register-button" type="submit" name="register-name">
       </div>
     </section>
-    <section class="ready-fight js-ready">
+    <section id="js-ready" class="ready-fight">
       <h2>Ready..?</h2>
       <label id="js-send-ready" class="player-ready check-wrapper" for="player-ready">
         <div class="check-bar"></div>
@@ -32,7 +32,7 @@
       <input style="display: none;" id="player-ready" type="checkbox" name="ready">
     </section>
   </section>
-  <section>
+  <section class="gamearea">
     <h1 class="game-title">タイピング綱引きするやで</h1>
     <div class="words-area">
       <span id="js-word">programming</span>
