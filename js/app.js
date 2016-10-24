@@ -22,13 +22,37 @@ function gameReady() {
   sendReady.addEventListener('click', function(e) {
     this.children[0].classList.toggle('is-check');
     fadeOut(document.querySelector('#js-ready'));
-    setTimeout(function() {
-      gameReadySecne.style.transition = 'all .2s ease-in-out';
-      gameReadySecne.style.opacity = '0';
-      gameReadySecne.style.transform = 'scale(0.8)';
-      gameStart();
+    setInterval(function() {
+      countDown();
     }, 1000);
   });
+}
+
+function countDown() {
+  var countScene = document.querySelector('#js-count');
+  var number = document.querySelector('#js-count-number');
+
+  var count = 5;
+  function countNum () {
+    number.textContent = count;
+    count--;
+    if (count == -1) {
+      setTimeout(function() {
+        fadeOutReady();
+      }, 300);
+    }
+    setTimeout(function() {
+      countNum();
+    }, 1000);
+  }
+  countNum();
+
+  function fadeOutReady() {
+    gameReadySecne.style.transition = 'all .2s ease-in-out';
+    gameReadySecne.style.opacity = '0';
+    gameReadySecne.style.transform = 'scale(0.8)';
+    gameStart();
+  }
 }
 
 function fadeOut(scene) {

@@ -55,7 +55,7 @@ h2 {
   }
   .enter-the-game {
     background-color: $black;
-    z-index: 1;
+    z-index: 2;
     .register-name {
       text-align: center;
       font-size: 0;
@@ -100,12 +100,20 @@ h2 {
   }
   .ready-fight {
     background-color: $black;
-    z-index: 0;
+    z-index: 1;
     .player-ready {
       display: inline-block;
       &:checked {
         display: none;
       }
+    }
+  }
+  .ready-count {
+    background-color: $black;
+    z-index: 0;
+    .count-number {
+      color: $white;
+      font-size: 20vw;
     }
   }
   .check-wrapper {
