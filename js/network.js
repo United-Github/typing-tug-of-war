@@ -7,7 +7,7 @@
 // 	// 	storageBucket: "",
 // 	// 	messagingSenderId: "69512977389"
 // 	// };
-// 	// firebase.initializeApp(config);   
+// 	// firebase.initializeApp(config);
 // 	// console.log('初期化したよ');
 // 	// var hoge = '1';
 // }
@@ -51,7 +51,7 @@ function tugOfWar() {
 
 	// fireのイベント登録
 	this.fire.forIn(function(key, value) {
-		
+
 		// コールバックイベントの初期化
 		this.changeEvent[key] = function(array, updateKey) {};
 		this.changeEventForSystem[key] = function(){};
@@ -60,7 +60,7 @@ function tugOfWar() {
 		value.on("value", function(snapshot) {
 			this.table[key] = snapshot.val();
 		}.bind(this));
-		
+
 		// テーブルが更新された時のイベント登録
 		value.on("child_changed", function(snapshot) {
 			this.table[key][snapshot.key()] = snapshot.val();
@@ -79,7 +79,7 @@ function tugOfWar() {
 	this.changeEventForSystem['ready'] = function (){
 		var flag = true;
 		this.table['ready'].forEach(function(element) {
-			if (element === 0) flag = false; 
+			if (element === 0) flag = false;
 		}, this);
 		// 全員が準備できていたらtrue
 		this.changeReadyEvent(flag);
