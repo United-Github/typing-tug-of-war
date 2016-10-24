@@ -1,30 +1,52 @@
 <!DOCTYPE html>
 <html lang="jp">
+
 <head>
   <meta charset="UTF-8">
   <title>タイピング綱引き</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
   <!-- FireBase -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
-  <script src='https://cdn.firebase.com/js/client/2.4.1/firebase.js'></script> 
+  <script src='https://cdn.firebase.com/js/client/2.4.1/firebase.js'></script>
 </head>
+
 <body>
-  <h1 class="game-title">タイピング綱引きするやで</h1>
-
-  <div class="words-area">
-    <span id="js-word">programming</span>
-  </div>
-
-  <div class="playground">
-    <p>とりあえずここの幅が変わればいいんじゃないですかね</p>
-    <div class="playground-tug">
-      <div id="js-red-tug" class="tug red-tug"></div>
-      <div id="js-blue-tug" class="tug blue-tug"></div>
+  <section class="ready-game">
+    <section class="enter-the-game js-enter">
+      <h2>Your name ?</h2>
+      <div class="register-name">
+        <input class="player-name" id="player-name" type="text" name="name" autocomplete="off">
+        <label id="js-send-name" class="register-player check-wrapper" for="register-button">
+          <div class="check-bar"></div>
+        </label>
+        <input style="display: none;" id="register-button" type="submit" name="register-name">
+      </div>
+    </section>
+    <section class="ready-fight js-ready">
+      <h2>Ready..?</h2>
+      <label id="js-send-ready" class="player-ready check-wrapper" for="player-ready">
+        <div class="check-bar"></div>
+      </label>
+      <input style="display: none;" id="player-ready" type="checkbox" name="ready">
+    </section>
+  </section>
+  <section>
+    <h1 class="game-title">タイピング綱引きするやで</h1>
+    <div class="words-area">
+      <span id="js-word">programming</span>
     </div>
-  </div>
-
+    <div class="playground">
+      <p>とりあえずここの幅が変わればいいんじゃないですかね</p>
+      <div class="playground-tug">
+        <div id="js-red-tug" class="tug red-tug"></div>
+        <div id="js-blue-tug" class="tug blue-tug"></div>
+      </div>
+    </div>
+  </section>
   <script src="./js/app.js"></script>
   <script src="./js/network.js"></script>
 </body>
+
 </html>

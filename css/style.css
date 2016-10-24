@@ -1,7 +1,44 @@
-html, body {
-  padding: 0;
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
-  color: #333; }
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after {
+  content: '';
+  content: none; }
+
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: .2em;
+  text-align: center; }
 
 .game-title {
   margin-top: 100px;
@@ -9,6 +46,99 @@ html, body {
 
 p {
   text-align: center; }
+
+h1 {
+  font-size: 60px;
+  letter-spacing: .1em;
+  color: #fff; }
+
+h2 {
+  width: 100%;
+  font-size: 45px;
+  letter-spacing: .2em;
+  color: #fff; }
+
+.ready-game {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background-color: #303E4D; }
+  .ready-game > section {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 600px;
+    height: 300px; }
+  .ready-game .enter-the-game .register-name {
+    text-align: center;
+    font-size: 0; }
+    .ready-game .enter-the-game .register-name .player-name {
+      display: inline-block;
+      vertical-align: bottom;
+      width: 450px;
+      height: 80px;
+      box-sizing: border-box;
+      margin-top: 40px;
+      font-size: 30px;
+      letter-spacing: .2em;
+      text-align: center;
+      border: 10px solid #fff;
+      background-color: transparent;
+      color: #fff;
+      border-radius: 4px;
+      outline: 0;
+      transition: all .3s; }
+      .ready-game .enter-the-game .register-name .player-name:hover {
+        background-color: rgba(255, 255, 255, 0.1); }
+      .ready-game .enter-the-game .register-name .player-name:focus {
+        border-color: #33b490; }
+    .ready-game .enter-the-game .register-name .register-player {
+      display: inline-block;
+      vertical-align: bottom;
+      font-size: 1rem;
+      width: 80px;
+      height: 80px;
+      margin-left: 20px; }
+      .ready-game .enter-the-game .register-name .register-player:hover {
+        background-color: rgba(255, 255, 255, 0.1); }
+      .ready-game .enter-the-game .register-name .register-player:focus {
+        border-color: #33b490; }
+  .ready-game .ready-fight {
+    display: none; }
+    .ready-game .ready-fight .player-ready {
+      display: inline-block; }
+      .ready-game .ready-fight .player-ready:checked {
+        display: none; }
+  .ready-game .check-wrapper {
+    width: 80px;
+    height: 80px;
+    margin-top: 40px;
+    border: 10px solid #fff;
+    box-sizing: border-box;
+    border-radius: 4px;
+    transition: background-color .3s; }
+    .ready-game .check-wrapper:hover {
+      background-color: rgba(255, 255, 255, 0.1); }
+    .ready-game .check-wrapper .check-bar {
+      width: 20px;
+      height: 20px;
+      margin-top: 15px;
+      margin-left: 9px;
+      border-bottom: 8px solid #fff;
+      border-left: 8px solid #fff;
+      transform: rotate(-135deg);
+      transition: all .1s ease-in-out; }
+      .ready-game .check-wrapper .check-bar.is-check {
+        border-bottom: 12px solid #33b490;
+        border-left: 12px solid #33b490;
+        width: 78px;
+        height: 35px;
+        margin-top: -20px;
+        margin-left: -5px;
+        transform: rotate(-45deg); }
 
 .words-area {
   border: 10px solid #ccc;
@@ -23,7 +153,7 @@ p {
   .words-area .touched-letter {
     color: #ccc; }
   .words-area .untouched-letter {
-    color: #333; }
+    color: #303E4D; }
 
 .playground {
   margin-top: 200px; }
