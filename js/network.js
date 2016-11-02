@@ -149,8 +149,9 @@ function tugOfWar() {
 	}
 
 	tugOfWar.prototype.setTyping = function(value) {
-			this.table['typing'][0] = value;
-			this.fire['typing'].update({[0] : value});
+			if (this.userIndex === -1) return false;
+			this.table['typing'][this.userIndex] = value;
+			this.fire['typing'].update({[this.userIndex] : value});
 	}
 	// テーブル内の値の取得
 	tugOfWar.prototype.getElement = function(key) {

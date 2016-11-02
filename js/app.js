@@ -73,6 +73,8 @@ function gameStart() {
   var previous = 0; // n回目のタイピング速度
   var current = 0; // n+1回目のタイピング速度
 
+  var totalTyping = 0;
+
   function attackForce() {
     var typeSpeed = current - previous;
     previous = current;
@@ -104,6 +106,9 @@ function gameStart() {
 
   function paintColor () {
     nowCorrect++; // 正答文字数のカウントUP
+    // 総計を取得
+    totalTyping ++;
+    game.setTyping(totalTyping);
 
     var touchedLetter = document.createElement('span');
     touchedLetter.className = 'touched-letter';
@@ -120,6 +125,7 @@ function gameStart() {
 
   // 出題単語を変更する処理
   function changeWord() {
+
     nowCorrect = 0; // 正答文字数のカウンターを元に戻す
     var word = Math.floor(Math.random() * wordList.length);
     wordArea.textContent = nowWord = wordList[word];
