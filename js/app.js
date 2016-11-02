@@ -9,15 +9,6 @@ registerName();
 
 
 function registerName() {
-
-  game.setChangeEvent(function(value, key){
-    $('.js-login').each(function(){
-              if ($(this).parent().parent().find('.js-name').data('index') == key) {
-                  $(this).toggleClass('is-check');
-              }
-            });
-  });
-
   $('.js-login').on('click', function(){
     $(this).toggleClass('is-check');
     var input = $(this).parent().parent().find('.js-name');

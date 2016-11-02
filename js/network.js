@@ -77,7 +77,12 @@ function tugOfWar() {
 
 							var button = $(this).parent().find('.js-login');
 							if (value == '1') {
-								button.toggleClass('is-check');
+								// button.toggleClass('is-check');
+							}
+							if (value == '1') {
+								button.addClass('is-check');
+							} else {
+								button.removeClass('is-check');
 							}
 						}
 					});
