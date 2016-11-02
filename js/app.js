@@ -6,10 +6,21 @@ registerName();
 //   console.log(array, updateKey);
 // });
 
+
+
 function registerName() {
+
+  game.setChangeEvent(function(value, key){
+    $('.js-login').each(function(){
+              if ($(this).parent().parent().find('.js-name').data('index') == key) {
+                  $(this).toggleClass('is-check');
+              }
+            });
+  });
+
   $('.js-login').on('click', function(){
     $(this).toggleClass('is-check');
-    var input = $(this).parent().find('.js-name');
+    var input = $(this).parent().parent().find('.js-name');
 
     var index = input.data('index');
     var name  = input.val();

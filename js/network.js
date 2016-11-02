@@ -65,10 +65,25 @@ function tugOfWar() {
 						if ($(this).data('index') == key) {
 								$(this).prop('disabled', (value == "")? false : true);
 								$(this).val(value);
+
 						}
 					});
 				});
 			}
+			if (key == 'ready') {
+				snapshot.val().forIn(function(key, value) {
+					$('.js-name').each(function(){
+						if ($(this).data('index') == key) {
+
+							var button = $(this).parent().find('.js-login');
+							if (value == '1') {
+								button.toggleClass('is-check');
+							}
+						}
+					});
+				});
+			}
+								$(this).parent().find('.js-login')
 		}.bind(this));
 
 		// テーブルが更新された時のイベント登録
