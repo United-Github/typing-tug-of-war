@@ -170,6 +170,11 @@ h3 {
   top: 0;
   z-index: -1;
   width: 100%;
+  .timer {
+    margin-top: 50px;
+    font-size: 52px;
+    color: $white;
+  }
   .words-area {
     border: 10px solid $gray;
     border-radius: 10px;
@@ -179,7 +184,7 @@ h3 {
     text-align: center;
     line-height: 100px;
     font-size: 40px;
-    margin: 100px auto 0;
+    margin: 50px auto 0;
     .touched-letter {
       color: $gray;
       text-decoration: line-through;

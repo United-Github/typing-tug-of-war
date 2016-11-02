@@ -6,8 +6,6 @@ registerName();
 //   console.log(array, updateKey);
 // });
 
-
-
 function registerName() {
   $('.js-login').on('click', function(){
     $(this).toggleClass('is-check');
@@ -77,6 +75,21 @@ function gameStart() {
   var current = 0; // n+1回目のタイピング速度
 
   var totalTyping = 0;
+
+  var timeLimit = 4; // 単位:秒
+  var leftTime = timeLimit;
+
+  timeKeeper();
+  function timeKeeper() {
+    leftTime--;
+    $('.js-timer').text(leftTime);
+    setTimeout(function() {
+      timeKeeper();
+    }, 1000);
+    if(leftTime == 0) {
+      gameOver();
+    }
+  }
 
   function attackForce() {
     var typeSpeed = current - previous;

@@ -166,6 +166,10 @@ h3 {
   top: 0;
   z-index: -1;
   width: 100%; }
+  .gamearea .timer {
+    margin-top: 50px;
+    font-size: 52px;
+    color: #fff; }
   .gamearea .words-area {
     border: 10px solid #ccc;
     border-radius: 10px;
@@ -175,7 +179,7 @@ h3 {
     text-align: center;
     line-height: 100px;
     font-size: 40px;
-    margin: 100px auto 0; }
+    margin: 50px auto 0; }
     .gamearea .words-area .touched-letter {
       color: #ccc;
       text-decoration: line-through; }
