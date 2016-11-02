@@ -168,32 +168,47 @@ h3 {
   width: 100%; }
   .gamearea .words-area {
     border: 10px solid #ccc;
-    border-radius: 20px;
-    background-color: #fff;
+    border-radius: 10px;
+    color: #fff;
     width: 750px;
     height: 100px;
     text-align: center;
     line-height: 100px;
     font-size: 40px;
-    margin: 50px auto; }
+    margin: 100px auto 0; }
     .gamearea .words-area .touched-letter {
       color: #ccc; }
     .gamearea .words-area .untouched-letter {
       color: #303E4D; }
   .gamearea .playground {
-    margin-top: 200px; }
+    margin-top: 100px; }
+    .gamearea .playground .center-point {
+      width: 100px;
+      margin: 0 auto 3px; }
     .gamearea .playground .playground-tug {
       display: flex; }
       .gamearea .playground .playground-tug .tug {
         height: 30px;
         width: 100vw;
+        line-height: 30px;
+        color: #fff;
         transition: all .2s; }
         .gamearea .playground .playground-tug .tug.red-tug {
           width: 50%;
+          text-align: right;
+          padding-right: 20px;
           background-color: #ed2a6b; }
         .gamearea .playground .playground-tug .tug.blue-tug {
           width: 50%;
+          text-align: left;
+          padding-left: 20px;
           background-color: #2a71ed; }
-    .gamearea .playground .center-point {
-      width: 100px;
-      margin: 0 auto 3px; }
+    .gamearea .playground .playground-team-member {
+      display: flex; }
+      .gamearea .playground .playground-team-member .member-list {
+        width: 50%;
+        margin-top: 50px; }
+        .gamearea .playground .playground-team-member .member-list p {
+          color: #fff;
+          font-size: 32px;
+          margin-top: 20px; }
