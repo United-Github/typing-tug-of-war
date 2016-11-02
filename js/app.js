@@ -8,7 +8,7 @@ function registerName() {
   $('.js-login').on('click', function(){
     var input = $(this).parent().find('.js-name');
 
-    var index = input.data();
+    var index = input.data('index');
     var name  = input.val();
 
     console.log(index, name);
