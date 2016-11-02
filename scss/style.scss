@@ -182,9 +182,10 @@ h3 {
     margin: 100px auto 0;
     .touched-letter {
       color: $gray;
+      text-decoration: line-through;
     }
     .untouched-letter {
-      color: $black;
+      color: $white;
     }
   }
 

@@ -177,9 +177,10 @@ h3 {
     font-size: 40px;
     margin: 100px auto 0; }
     .gamearea .words-area .touched-letter {
-      color: #ccc; }
+      color: #ccc;
+      text-decoration: line-through; }
     .gamearea .words-area .untouched-letter {
-      color: #303E4D; }
+      color: #fff; }
   .gamearea .playground {
     margin-top: 100px; }
     .gamearea .playground .center-point {

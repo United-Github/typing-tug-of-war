@@ -24,7 +24,7 @@ function registerName() {
 
     var index = input.data('index');
     var name  = input.val();
-
+    $('.js-member-list').find('p').eq(index).text(name); // ゲーム画面のチームメンバーリストに名前を表示
     game.loginPlayer(index, name);
     game.setStatusReady(true);
   });
