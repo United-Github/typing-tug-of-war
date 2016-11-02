@@ -203,11 +203,27 @@ h3 {
           text-align: right;
           padding-right: 20px;
           background-color: #ed2a6b; }
+          .gamearea .playground .playground-tug .tug.red-tug.win:before {
+            content: 'West team WIN!'; }
         .gamearea .playground .playground-tug .tug.blue-tug {
           width: 50%;
           text-align: left;
           padding-left: 20px;
           background-color: #2a71ed; }
+          .gamearea .playground .playground-tug .tug.blue-tug.win:before {
+            content: 'East team WIN!'; }
+        .gamearea .playground .playground-tug .tug.win {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw !important;
+          height: 100vh !important;
+          text-align: center;
+          font-size: 0; }
+          .gamearea .playground .playground-tug .tug.win:before {
+            display: block;
+            font-size: 100px;
+            line-height: 100vh; }
     .gamearea .playground .playground-team-member {
       display: flex; }
       .gamearea .playground .playground-team-member .member-list {

@@ -155,10 +155,21 @@ function gameStart() {
   }
 
   function gameOver() {
-    gameoverFlag = true;
-    var westTeamScore = game.getElement('typing')[0] + game.getElement('typing')[1];
-    var eastTeamScore = game.getElement('typing')[2] + game.getElement('typing')[3];
-    console.log(westTeamScore, eastTeamScore);
+    setTimeout(function() {
+      gameoverFlag = true;
+      var westTeamScore = game.getElement('typing')[0] + game.getElement('typing')[1];
+      var eastTeamScore = game.getElement('typing')[2] + game.getElement('typing')[3];
+      if (westTeamScore > eastTeamScore) {
+        // 西の勝ち
+        westTug.classList.add('win');
+      } else if (westTeamScore < eastTeamScore) {
+        // 東の勝ち
+        eastTug.classList.add('win');
+      } else {
+        // 同点
+        console.log('同点！');
+      }
+    }, 1200);
   }
 
   // キー押下のイベントリスナー
