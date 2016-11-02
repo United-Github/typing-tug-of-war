@@ -84,76 +84,71 @@ function tugOfWar() {
 		// 全員が準備できていたらtrue
 		this.changeReadyEvent(flag);
 	}.bind(this);
-
-
 }
-	// チェンジイベントの登録 (データ名, イベント関数)
-	tugOfWar.prototype.setChangeEvent = function(key, func) {
-		if (this.changeEvent[key] === undefined) return false;
-		this.changeEvent[key] = func;
-		return true;
-	}
+// チェンジイベントの登録 (データ名, イベント関数)
+tugOfWar.prototype.setChangeEvent = function(key, func) {
+	if (this.changeEvent[key] === undefined) return false;
+	this.changeEvent[key] = func;
+	return true;
+}
 
-	// 初期化処理
-	tugOfWar.prototype.initializePlayer = function() {
-		if (this.userIndex === -1) return false;
-		this.table['typing'][this.userIndex] = 0;
-		this.table['ready'][this.userIndex] = 0;
-		this.fire['typing'].update({[this.userIndex]:0});
-		this.fire['ready'].update({[this.userIndex] : 0});
-		return true;
-	}
-	// プレイヤーのログイン(番号, ユーザー名)
-	tugOfWar.prototype.loginPlayer = function (index, name) {
-		if (this.userIndex !== -1) return false;
-		if (index < 0 && 3 < index) return false;
-		if (this.table['user'][index] !== "") return false;
-		this.userIndex = index;
-		this.table['user'][index] = name;
-		this.fire['user'].update({[index] : name});
+// 初期化処理
+tugOfWar.prototype.initializePlayer = function() {
+	if (this.userIndex === -1) return false;
+	this.table['typing'][this.userIndex] = 0;
+	this.table['ready'][this.userIndex] = 0;
+	this.fire['typing'].update({[this.userIndex]:0});
+	this.fire['ready'].update({[this.userIndex] : 0});
+	return true;
+}
+// プレイヤーのログイン(番号, ユーザー名)
+tugOfWar.prototype.loginPlayer = function (index, name) {
+	if (this.userIndex !== -1) return false;
+	if (index < 0 && 3 < index) return false;
+	if (this.table['user'][index] !== "") return false;
+	this.userIndex = index;
+	this.table['user'][index] = name;
+	this.fire['user'].update({[index] : name});
+	this.initializePlayer();
+	return true;
+}
+// プレイヤーのログアウト処理
+tugOfWar.prototype.logoutPlayer = function () {
+	if (this.userIndex === -1) return false;
+		this.fire['user'].update({[this.userIndex] : ""});
+		this.table['user'][this.userIndex] = "";
 		this.initializePlayer();
+		this.userIndex = -1;
 		return true;
-	}
-	// プレイヤーのログアウト処理
-	tugOfWar.prototype.logoutPlayer = function () {
-		if (this.userIndex === -1) return false;
-			this.fire['user'].update({[this.userIndex] : ""});
-			this.table['user'][this.userIndex] = "";
-			this.initializePlayer();
-			this.userIndex = -1;
-			return true;
-	}
-	// ready変更時のイベント登録(セットする関数の引数には、全員が準備できていたらtrue)
-	tugOfWar.prototype.setReadyEvent = function(func) {
-		this.changeReadyEvent = func;
-	}
+}
+// ready変更時のイベント登録(セットする関数の引数には、全員が準備できていたらtrue)
+tugOfWar.prototype.setReadyEvent = function(func) {
+	this.changeReadyEvent = func;
+}
 
-	// テーブル内の値の取得
-	tugOfWar.prototype.getElement = function(key) {
-		return (key in this.table) ? this.table[key] : [];
-	}
+// テーブル内の値の取得
+tugOfWar.prototype.getElement = function(key) {
+	return (key in this.table) ? this.table[key] : [];
+}
 
-	// 準備状態のセッター
-	tugOfWar.prototype.setStatusReady = function(status) {
-		if (this.userIndex !== -1 ){
-			status = status ? 1 : 0;
-			this.table['ready'][this.userIndex] = status;
-			this.fire['ready'].update({[this.userIndex] : status});
-		}
+// 準備状態のセッター
+tugOfWar.prototype.setStatusReady = function(status) {
+	if (this.userIndex !== -1 ){
+		status = status ? 1 : 0;
+		this.table['ready'][this.userIndex] = status;
+		this.fire['ready'].update({[this.userIndex] : status});
 	}
+}
 
 $(function (){
 	// var game = new tugOfWar();
-	game.setChangeEvent('user', function(array, updateKey){
-		console.log(array, updateKey);
-	});
-	$(".js_Click").on("click", function() {
-		console.log(game.getElement('user'));
-		// console.log(game.test());
-		console.log(game.loginPlayer(1,"tanaka"));
-	});
-	$(".js_Check").on("click", function() {
-		game.setStatusReady(true);
-		// console.log(game.logoutPlayer());
-	});
+	// $(".js_Click").on("click", function() {
+	// 	console.log(game.getElement('user'));
+	// 	// console.log(game.test());
+	// 	console.log(game.loginPlayer(1,"tanaka"));
+	// });
+	// $(".js_Check").on("click", function() {
+	// 	game.setStatusReady(true);
+	// 	// console.log(game.logoutPlayer());
+	// });
 })

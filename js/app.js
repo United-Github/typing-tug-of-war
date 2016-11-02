@@ -1,8 +1,10 @@
-// 保存したいやつ
-var player = [];
-registerName();
 var game = new tugOfWar();
-var gameReadySecne = document.querySelector('#js-game-ready');
+var gameReadyScene = document.querySelector('#js-game-ready');
+registerName();
+
+// game.setChangeEvent('user', function(array, updateKey){
+//   console.log(array, updateKey);
+// });
 
 function registerName() {
   $('.js-login').on('click', function(){
@@ -11,23 +13,26 @@ function registerName() {
     var index = input.data('index');
     var name  = input.val();
 
-    console.log(index, name);
+    game.loginPlayer(index, name);
+    game.setStatusReady(true);
   });
-}
 
-function gameReady() {
-  var sendReady = document.querySelector('#js-send-ready');
-  sendReady.addEventListener('click', function(e) {
-    this.children[0].classList.toggle('is-check');
-    fadeOut(document.querySelector('#js-ready'));
-    setInterval(function() {
+  // ready の監視
+  game.setReadyEvent(function(flag){
+    if(flag === true) {
+      // 全員が準備できた
+      var loginScene = document.getElementById('js-scene-login');
+      loginScene.style.opacity = '0';
       countDown();
-    }, 1000);
+    } else {
+      // 全員の準備ができていない
+      console.log('準備未完了');
+    }
   });
+
 }
 
 function countDown() {
-  var countScene = document.querySelector('#js-count');
   var number = document.querySelector('#js-count-number');
 
   var count = 5;
@@ -39,33 +44,16 @@ function countDown() {
         fadeOutReady();
       }, 300);
     }
-    setTimeout(function() {
-      countNum();
-    }, 1000);
   }
-  countNum();
+  setInterval(function() { countNum(); }, 1000);
 
   function fadeOutReady() {
-    gameReadySecne.style.transition = 'all .2s ease-in-out';
-    gameReadySecne.style.opacity = '0';
-    gameReadySecne.style.transform = 'scale(0.8)';
+    gameReadyScene.style.transition = 'all .2s ease-in-out';
+    gameReadyScene.style.opacity = '0';
+    gameReadyScene.style.transform = 'scale(0.8)';
     gameStart();
   }
 }
-
-function fadeOut(scene) {
-  setTimeout(function() {
-    scene.style.transition = 'opacity .3s';
-    scene.style.opacity = '0';
-    setTimeout(function() {
-      scene.style.display = 'none';
-    }, 500);
-  }, 500);
-
-  return;
-}
-
-gameStart();
 
 function gameStart() {
   // 仮の単語リスト（適当）
