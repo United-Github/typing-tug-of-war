@@ -64,8 +64,8 @@ function tugOfWar() {
 		// テーブルが更新された時のイベント登録
 		value.on("child_changed", function(snapshot) {
 			this.table[key][snapshot.key()] = snapshot.val();
-			this.changeEvent[key](this.table[key],snapshot.key());
-			this.changeEventForSystem[key]();
+			this.changeEvent[key](this.table[key][snapshot.key()],snapshot.key());
+			this.changeEventForSystem[key](this.table[key][snapshot.key()],snapshot.key());
 		}.bind(this));
 
 	}.bind(this));
@@ -76,7 +76,7 @@ function tugOfWar() {
 	}.bind(this));
 
 	// readyの変更時のイベント
-	this.changeEventForSystem['ready'] = function (){
+	this.changeEventForSystem['ready'] = function (value, index){
 		var flag = true;
 		this.table['ready'].forEach(function(element) {
 			if (element === 0) flag = false;
@@ -85,6 +85,14 @@ function tugOfWar() {
 		this.changeReadyEvent(flag);
 	}.bind(this);
 
+	this.changeEventForSystem['user'] = function (value, index) {
+		$('.js-name').each(function(){
+			if ($(this).data('index') == index) {
+					$(this).prop('disabled', (value == "")? false : true);
+					$(this).val(value);
+			}
+		});
+	}
 
 }
 	// チェンジイベントの登録 (データ名, イベント関数)
