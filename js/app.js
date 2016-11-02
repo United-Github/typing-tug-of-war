@@ -77,7 +77,7 @@ function gameStart() {
 
   var totalTyping = 0;
 
-  var timeLimit = 6; // 単位:秒
+  var timeLimit = 60; // 単位:秒
   var leftTime = timeLimit;
 
   timeKeeper();
@@ -100,17 +100,36 @@ function gameStart() {
   $('.js-playing_name').each(function() {
     $(this).text(playersName[$(this).data('index')]);
   });
-  function attackForce() {
-    var typeSpeed = current - previous;
-    previous = current;
-    return typeSpeed;
+
+
+
+
+  var westForceCurrent = 0;
+  var eastForceCurrent = 0;
+  var westForcePrevious = 0;
+  var eastForcePrevious = 0;
+
+  function westAttack() {
+    westForceCurrent = game.getElement('typing')[0] + game.getElement('typing')[1];
+    var westTypeSpeed = (game.getElement('typing')[0] + game.getElement('typing')[1]) - westForcePrevious;
+    westForcePrevious = westForceCurrent;
+    return westTypeSpeed;
   }
 
-  function reloadView() {
-    westForce = attackForce();
-    eastForce = 3;
+  function eastAttack() {
+    eastForceCurrent = game.getElement('typing')[2] + game.getElement('typing')[3];
+    var eastTypeSpeed = (game.getElement('typing')[2] + game.getElement('typing')[3]) - eastForcePrevious;
+    eastForcePrevious = eastForceCurrent;
+    return eastTypeSpeed;
+  }
 
-    var width = 100 / (westForce + eastForce) + eastForce;
+
+  function reloadView() {
+    wA = westAttack() + 1;
+    eA = eastAttack() + 1;
+    console.log(wA, eA);
+    var width = 100 / ( wA + eA ) * wA;
+    console.log(width);
     westTug.style.width = width + 'vw';
     eastTug.style.width = (100-width) + 'vw';
   }
@@ -157,8 +176,8 @@ function gameStart() {
   function gameOver() {
     setTimeout(function() {
       gameoverFlag = true;
-      var westTeamScore = game.getElement('typing')[0] + game.getElement('typing')[1];
-      var eastTeamScore = game.getElement('typing')[2] + game.getElement('typing')[3];
+      var westTeamScore = westTug.style.width;
+      var eastTeamScore = eastTug.style.width;
       if (westTeamScore > eastTeamScore) {
         // 西の勝ち
         westTug.classList.add('win');
