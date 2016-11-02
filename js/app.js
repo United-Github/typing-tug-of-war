@@ -57,8 +57,9 @@ function countDown() {
 }
 
 function gameStart() {
+  var gameoverFlag = false;
   // 仮の単語リスト（適当）
-  var wordList = ['piyo', 'huga', 'hoge', 'network', 'oracle', 'environment', 'install', 'template', 'sass', 'include', 'extend', 'add', 'remove', 'append', 'typiing', 'browser', 'value', 'javascript', 'c', 'script', 'python', 'ruby', 'design', 'node', 'array', 'element', 'index', 'undefined', 'function', 'php', 'doctype', 'github', 'api', 'architecture', 'application', 'sublimetext', 'foreach', 'int', 'modules', 'view', 'model', 'readme', 'programming', 'version', 'export', 'import', 'input', 'document', 'variable', 'content', 'division', 'markup', 'math', 'length', 'header', 'language', 'encode', 'decode', 'settings', 'stylesheet', 'console', 'error', 'handling', 'class', 'native', 'sudo', 'keyboard', 'pointer', 'format', 'query', 'queue', 'selector'];
+  var wordList = ['piyo', 'huga', 'hoge', 'network', 'oracle', 'environment', 'install', 'template', 'sass', 'include', 'extend', 'add', 'remove', 'append', 'typing', 'browser', 'value', 'javascript', 'c', 'script', 'python', 'ruby', 'design', 'node', 'array', 'element', 'index', 'undefined', 'function', 'php', 'doctype', 'github', 'api', 'architecture', 'application', 'sublimetext', 'foreach', 'int', 'modules', 'view', 'model', 'readme', 'programming', 'version', 'export', 'import', 'input', 'document', 'variable', 'content', 'division', 'markup', 'math', 'length', 'header', 'language', 'encode', 'decode', 'settings', 'stylesheet', 'console', 'error', 'handling', 'class', 'native', 'sudo', 'keyboard', 'pointer', 'format', 'query', 'queue', 'selector'];
 
   // TARGET DOM
   var wordArea = document.querySelector('#js-word');
@@ -76,11 +77,15 @@ function gameStart() {
 
   var totalTyping = 0;
 
-  var timeLimit = 4; // 単位:秒
+  var timeLimit = 6; // 単位:秒
   var leftTime = timeLimit;
 
   timeKeeper();
   function timeKeeper() {
+    if(gameoverFlag){
+      leftTime = 0;
+      return;
+    };
     leftTime--;
     $('.js-timer').text(leftTime);
     setTimeout(function() {
@@ -88,6 +93,7 @@ function gameStart() {
     }, 1000);
     if(leftTime == 0) {
       gameOver();
+      return;
     }
   }
   var playersName = game.getElement('user');
@@ -114,19 +120,17 @@ function gameStart() {
   }, 1000);
 
   function checkType(downedkey) {
+    if(gameoverFlag) return;
     if (downedkey == nowWord.charAt(nowCorrect)) {
       paintColor();
       current++;
       if (nowWord.length == nowCorrect) changeWord();
-    } else {
-
     }
   }
 
   function paintColor () {
     nowCorrect++; // 正答文字数のカウントUP
-    // 総計を取得
-    totalTyping ++;
+    totalTyping++; // 総計を取得
     game.setTyping(totalTyping);
 
     var touchedLetter = document.createElement('span');
@@ -151,12 +155,14 @@ function gameStart() {
   }
 
   function gameOver() {
-    console.log('ゲームオーバ！');
+    gameoverFlag = true;
+    var westTeamScore = game.getElement('typing')[0] + game.getElement('typing')[1];
+    var eastTeamScore = game.getElement('typing')[2] + game.getElement('typing')[3];
+    console.log(westTeamScore, eastTeamScore);
   }
 
   // キー押下のイベントリスナー
   document.addEventListener('keydown', function(event) {
     checkType(event.key);
   });
-
 }
