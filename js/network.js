@@ -59,6 +59,16 @@ function tugOfWar() {
 		// テーブルを取得できた時のイベント登録
 		value.on("value", function(snapshot) {
 			this.table[key] = snapshot.val();
+			if (key == 'user') {
+				snapshot.val().forIn(function(key, value) {
+					$('.js-name').each(function(){
+						if ($(this).data('index') == key) {
+								$(this).prop('disabled', (value == "")? false : true);
+								$(this).val(value);
+						}
+					});
+				});
+			}
 		}.bind(this));
 
 		// テーブルが更新された時のイベント登録
@@ -102,6 +112,7 @@ function tugOfWar() {
 		return true;
 	}
 
+
 	// 初期化処理
 	tugOfWar.prototype.initializePlayer = function() {
 		if (this.userIndex === -1) return false;
@@ -111,6 +122,7 @@ function tugOfWar() {
 		this.fire['ready'].update({[this.userIndex] : 0});
 		return true;
 	}
+
 	// プレイヤーのログイン(番号, ユーザー名)
 	tugOfWar.prototype.loginPlayer = function (index, name) {
 		if (this.userIndex !== -1) return false;
@@ -136,6 +148,10 @@ function tugOfWar() {
 		this.changeReadyEvent = func;
 	}
 
+	tugOfWar.prototype.setTyping = function(value) {
+			this.table['typing'][0] = value;
+			this.fire['typing'].update({[0] : value});
+	}
 	// テーブル内の値の取得
 	tugOfWar.prototype.getElement = function(key) {
 		return (key in this.table) ? this.table[key] : [];
@@ -152,16 +168,16 @@ function tugOfWar() {
 
 $(function (){
 	// var game = new tugOfWar();
-	game.setChangeEvent('user', function(array, updateKey){
-		console.log(array, updateKey);
-	});
-	$(".js_Click").on("click", function() {
-		console.log(game.getElement('user'));
-		// console.log(game.test());
-		console.log(game.loginPlayer(1,"tanaka"));
-	});
-	$(".js_Check").on("click", function() {
-		game.setStatusReady(true);
-		// console.log(game.logoutPlayer());
-	});
+	// game.setChangeEvent('user', function(array, updateKey){
+	// 	console.log(array, updateKey);
+	// });
+	// $(".js_Click").on("click", function() {
+	// 	console.log(game.getElement('user'));
+	// 	// console.log(game.test());
+	// 	console.log(game.loginPlayer(1,"tanaka"));
+	// });
+	// $(".js_Check").on("click", function() {
+	// 	game.setStatusReady(true);
+	// 	// console.log(game.logoutPlayer());
+	// });
 })
