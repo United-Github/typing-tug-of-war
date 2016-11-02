@@ -33,7 +33,15 @@ h1 {
 
 h2 {
   width: 100%;
-  font-size: 45px;
+  font-size: 55px;
+  margin-top: 100px;
+  letter-spacing: .2em;
+  color: $white;
+}
+
+h3 {
+  width: 100%;
+  font-size: 32px;
   letter-spacing: .2em;
   color: $white;
 }
@@ -61,6 +69,11 @@ h2 {
     .register-name {
       text-align: center;
       font-size: 0;
+      display: flex;
+      .divide-team {
+        width: 50%;
+        margin-top: 100px;
+      }
       .player-name {
         display: inline-block;
         vertical-align: bottom;
@@ -109,14 +122,17 @@ h2 {
 
   // カウントダウンシーン
   .ready-count {
+    height: 100vh;
     background-color: $black;
     z-index: 0;
     .count-number {
       color: $white;
       font-size: 20vw;
+      line-height: 100vh;
     }
   }
   .check-wrapper {
+    display: inline-block;
     width: 80px;
     height: 80px;
     margin-top: 40px;

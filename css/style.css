@@ -55,7 +55,14 @@ h1 {
 
 h2 {
   width: 100%;
-  font-size: 45px;
+  font-size: 55px;
+  margin-top: 100px;
+  letter-spacing: .2em;
+  color: #fff; }
+
+h3 {
+  width: 100%;
+  font-size: 32px;
   letter-spacing: .2em;
   color: #fff; }
 
@@ -77,7 +84,11 @@ h2 {
     z-index: 2; }
     .ready-game .enter-the-game .register-name {
       text-align: center;
-      font-size: 0; }
+      font-size: 0;
+      display: flex; }
+      .ready-game .enter-the-game .register-name .divide-team {
+        width: 50%;
+        margin-top: 100px; }
       .ready-game .enter-the-game .register-name .player-name {
         display: inline-block;
         vertical-align: bottom;
@@ -114,12 +125,15 @@ h2 {
         .ready-game .enter-the-game .register-name .register-player:focus {
           border-color: #33b490; }
   .ready-game .ready-count {
+    height: 100vh;
     background-color: #303E4D;
     z-index: 0; }
     .ready-game .ready-count .count-number {
       color: #fff;
-      font-size: 20vw; }
+      font-size: 20vw;
+      line-height: 100vh; }
   .ready-game .check-wrapper {
+    display: inline-block;
     width: 80px;
     height: 80px;
     margin-top: 40px;
