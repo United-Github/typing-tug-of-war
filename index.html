@@ -13,13 +13,14 @@
 </head>
 
 <body>
+
   <section id="js-game-ready" class="ready-game">
 
     <section id="js-enter" class="enter-the-game">
       <h2>Your name ?</h2>
       <div class="register-name">
         <input class="player-name" id="player-name" type="text" name="name" autocomplete="off">
-        <label id="js-send-name" class="register-player check-wrapper" for="register-button">
+        <label id="js-send-name" class="register-player check-wrapper js_Click" for="register-button">
           <div class="check-bar"></div>
         </label>
         <input style="display: none;" id="register-button" type="submit" name="register-name">
@@ -28,7 +29,7 @@
 
     <section id="js-ready" class="ready-fight">
       <h2>Ready..?</h2>
-      <label id="js-send-ready" class="player-ready check-wrapper" for="player-ready">
+      <label id="js-send-ready" class="player-ready check-wrapper js_Check" for="player-ready">
         <div class="check-bar"></div>
       </label>
       <input style="display: none;" id="player-ready" type="checkbox" name="ready">
@@ -38,13 +39,15 @@
       <p id="js-count-number" class="count-number"></p>
     </section>
   </section>
+
   <section class="gamearea">
-    <h1 class="game-title">タイピング綱引きするやで</h1>
     <div class="words-area">
       <span id="js-word">programming</span>
     </div>
     <div class="playground">
-      <p>とりあえずここの幅が変わればいいんじゃないですかね</p>
+      <div class="center-point">
+        <object type="image/svg+xml" data="img/center.svg" width="16" height="16" fill="#ffffff"></object>
+      </div>
       <div class="playground-tug">
         <div id="js-red-tug" class="tug red-tug"></div>
         <div id="js-blue-tug" class="tug blue-tug"></div>

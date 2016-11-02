@@ -153,7 +153,7 @@ $(function (){
 		console.log(game.loginPlayer(1,"tanaka"));
 	});
 	$(".js_Check").on("click", function() {
-	game.setStatusReady(true);
+		game.setStatusReady(true);
 		// console.log(game.logoutPlayer());
 	});
 })

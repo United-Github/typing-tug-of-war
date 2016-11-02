@@ -13,6 +13,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   letter-spacing: .2em;
   text-align: center;
+  background-color: $black;
 }
 
 .game-title {
@@ -175,22 +176,24 @@ h2 {
   .playground {
     margin-top: 200px;
     .playground-tug {
-      font-size: 0;
+      display: flex;
       .tug {
         height: 30px;
-        font-size: 1rem;
-        display: inline-block;
-        vertical-align: top;
+        width: 100vw;
         transition: all .2s;
         &.red-tug {
-          width: 50vw;
+          width: 50%;
           background-color: $red;
         }
         &.blue-tug {
-          width: 50vw;
+          width: 50%;
           background-color: $blue;
         }
       }
+    }
+    .center-point {
+      width: 100px;
+      margin: 0 auto 3px;
     }
   }
 }

@@ -67,6 +67,8 @@ function fadeOut(scene) {
   return;
 }
 
+gameStart();
+
 function gameStart() {
   // 仮の単語リスト（適当）
   var wordList = ['piyo', 'huga', 'hoge', 'network', 'oracle', 'environment', 'install', 'template', 'sass', 'include', 'extend', 'add', 'remove', 'append', 'typiing', 'browser', 'value', 'javascript', 'c', 'script', 'python', 'ruby', 'design', 'node', 'array', 'element', 'index', 'undefined', 'function', 'php', 'doctype', 'github', 'api', 'architecture', 'application', 'sublimetext', 'foreach', 'int', 'modules', 'view', 'model', 'readme', 'programming', 'version', 'export', 'import', 'input', 'document', 'variable', 'content', 'division', 'markup', 'math', 'length', 'header', 'language', 'encode', 'decode', 'settings', 'stylesheet', 'console', 'error', 'handling', 'class', 'native', 'sudo', 'keyboard', 'pointer', 'format', 'query', 'queue', 'selector'];
@@ -82,32 +84,35 @@ function gameStart() {
   var westForce = 50; // 相手：西軍の強さ（幅[%]）
   var eastForce = 50; // 自分：東軍の強さ（幅[%]）
 
-  function npcAttach (force) {
-    westForce += force;
+  var previous = 0; // n回目のタイピング速度
+  var current = 0; // n+1回目のタイピング速度
+
+  function attackForce() {
+    var typeSpeed = current - previous;
+    previous = current;
+    return typeSpeed;
   }
 
-  // チーム戦＆リアルタイムをキー押下ごとにやると描画がなんか辛そうな気がスルので100ms毎に幅を更新
-  function myAttack() {
-    npcAttach(2); // 擬似的に敵のタイピングを表現
+  function reloadView() {
+    westForce = attackForce();
+    eastForce = 3;
 
-    var width = Math.floor( ( 100/(westForce + eastForce) ) * westForce );
-    if ( width < 0 || width > 100 ) {
-      gameOver();
-    }
-
-    westTug.style.width = width + '%';
-    eastTug.style.width = (100 - width) + '%';
+    var width = 100 / (westForce + eastForce) + eastForce;
+    westTug.style.width = width + 'vw';
+    eastTug.style.width = (100-width) + 'vw';
   }
 
-  setInterval(myAttack, 50);
+  setInterval(function() {
+    reloadView();
+  }, 1000);
 
   function checkType(downedkey) {
     if (downedkey == nowWord.charAt(nowCorrect)) {
       paintColor();
-      eastForce+=3;
+      current++;
       if (nowWord.length == nowCorrect) changeWord();
     } else {
-      eastForce-=1;
+
     }
   }
 

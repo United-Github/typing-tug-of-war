@@ -38,7 +38,8 @@ table {
 body {
   font-family: 'Montserrat', sans-serif;
   letter-spacing: .2em;
-  text-align: center; }
+  text-align: center;
+  background-color: #303E4D; }
 
 .game-title {
   margin-top: 100px;
@@ -172,16 +173,17 @@ h2 {
   .gamearea .playground {
     margin-top: 200px; }
     .gamearea .playground .playground-tug {
-      font-size: 0; }
+      display: flex; }
       .gamearea .playground .playground-tug .tug {
         height: 30px;
-        font-size: 1rem;
-        display: inline-block;
-        vertical-align: top;
+        width: 100vw;
         transition: all .2s; }
         .gamearea .playground .playground-tug .tug.red-tug {
-          width: 50vw;
+          width: 50%;
           background-color: #ed2a6b; }
         .gamearea .playground .playground-tug .tug.blue-tug {
-          width: 50vw;
+          width: 50%;
           background-color: #2a71ed; }
+    .gamearea .playground .center-point {
+      width: 100px;
+      margin: 0 auto 3px; }
