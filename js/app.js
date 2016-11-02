@@ -5,17 +5,13 @@ var game = new tugOfWar();
 var gameReadySecne = document.querySelector('#js-game-ready');
 
 function registerName() {
-  var sendName = document.querySelector('#js-send-name');
-  sendName.addEventListener('click', function(e) {
-    this.children[0].classList.toggle('is-check');
-    // ここでdbに登録？
-    var index = 0;
-    game.loginPlayer(index, document.querySelector('#player-name').value);
-    player.push( document.querySelector('#player-name').value );
-    fadeOut( document.querySelector('#js-enter') );
-    setTimeout(function() {
-      gameReady();
-    }, 1000);
+  $('.js-login').on('click', function(){
+    var input = $(this).parent().find('.js-name');
+
+    var index = input.data();
+    var name  = input.val();
+
+    console.log(index, name);
   });
 }
 
