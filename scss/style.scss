@@ -172,14 +172,14 @@ h3 {
   width: 100%;
   .words-area {
     border: 10px solid $gray;
-    border-radius: 20px;
-    background-color: $white;
+    border-radius: 10px;
+    color: $white;
     width: 750px;
     height: 100px;
     text-align: center;
     line-height: 100px;
     font-size: 40px;
-    margin: 50px auto;
+    margin: 100px auto 0;
     .touched-letter {
       color: $gray;
     }
@@ -189,26 +189,44 @@ h3 {
   }
 
   .playground {
-    margin-top: 200px;
+    margin-top: 100px;
+    .center-point {
+      width: 100px;
+      margin: 0 auto 3px;
+    }
     .playground-tug {
       display: flex;
       .tug {
         height: 30px;
         width: 100vw;
+        line-height: 30px;
+        color: $white;
         transition: all .2s;
         &.red-tug {
           width: 50%;
+          text-align: right;
+          padding-right: 20px;
           background-color: $red;
         }
         &.blue-tug {
           width: 50%;
+          text-align: left;
+          padding-left: 20px;
           background-color: $blue;
         }
       }
     }
-    .center-point {
-      width: 100px;
-      margin: 0 auto 3px;
+    .playground-team-member {
+      display: flex;
+      .member-list {
+        width: 50%;
+        margin-top: 50px;
+        p {
+          color: $white;
+          font-size: 32px;
+          margin-top: 20px;
+        }
+      }
     }
   }
 }
