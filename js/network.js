@@ -143,7 +143,7 @@ function tugOfWar() {
 	}
 
 $(function (){
-	var game = new tugOfWar();
+	// var game = new tugOfWar();
 	game.setChangeEvent('user', function(array, updateKey){
 		console.log(array, updateKey);
 	});

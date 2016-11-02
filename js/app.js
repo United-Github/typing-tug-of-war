@@ -1,7 +1,7 @@
 // 保存したいやつ
 var player = [];
 registerName();
-
+var game = new tugOfWar();
 var gameReadySecne = document.querySelector('#js-game-ready');
 
 function registerName() {
@@ -9,6 +9,8 @@ function registerName() {
   sendName.addEventListener('click', function(e) {
     this.children[0].classList.toggle('is-check');
     // ここでdbに登録？
+    var index = 0;
+    game.loginPlayer(index, document.querySelector('#player-name').value);
     player.push( document.querySelector('#player-name').value );
     fadeOut( document.querySelector('#js-enter') );
     setTimeout(function() {
