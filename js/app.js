@@ -78,6 +78,10 @@ function gameStart() {
 
   var totalTyping = 0;
 
+  var playersName = game.getElement('user');
+  $('.js-playing_name').each(function() {
+    $(this).text(playersName[$(this).data('index')]);
+  });
   function attackForce() {
     var typeSpeed = current - previous;
     previous = current;
