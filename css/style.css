@@ -71,8 +71,7 @@ h2 {
     left: 0;
     right: 0;
     margin: auto;
-    width: 600px;
-    height: 300px; }
+    width: 100%; }
   .ready-game .enter-the-game {
     background-color: #303E4D;
     z-index: 2; }
@@ -99,6 +98,10 @@ h2 {
           background-color: rgba(255, 255, 255, 0.1); }
         .ready-game .enter-the-game .register-name .player-name:focus {
           border-color: #33b490; }
+        .ready-game .enter-the-game .register-name .player-name::-webkit-input-placeholder {
+          color: rgba(255, 255, 255, 0.1); }
+      .ready-game .enter-the-game .register-name .player-ready {
+        display: inline-block; }
       .ready-game .enter-the-game .register-name .register-player {
         display: inline-block;
         vertical-align: bottom;
@@ -110,13 +113,6 @@ h2 {
           background-color: rgba(255, 255, 255, 0.1); }
         .ready-game .enter-the-game .register-name .register-player:focus {
           border-color: #33b490; }
-  .ready-game .ready-fight {
-    background-color: #303E4D;
-    z-index: 1; }
-    .ready-game .ready-fight .player-ready {
-      display: inline-block; }
-      .ready-game .ready-fight .player-ready:checked {
-        display: none; }
   .ready-game .ready-count {
     background-color: #303E4D;
     z-index: 0; }

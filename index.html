@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="jp">
-
 <head>
   <meta charset="UTF-8">
   <title>タイピング綱引き</title>
@@ -11,35 +10,44 @@
   <script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
   <script src='https://cdn.firebase.com/js/client/2.4.1/firebase.js'></script>
 </head>
-
 <body>
-
+  <!-- ゲーム開始前シーン -->
   <section id="js-game-ready" class="ready-game">
-
+    <!-- フォーム入力シーン -->
     <section id="js-enter" class="enter-the-game">
-      <h2>Your name ?</h2>
+      <h2>Ready..?</h2>
       <div class="register-name">
-        <input class="player-name" id="player-name" type="text" name="name" autocomplete="off">
-        <label id="js-send-name" class="register-player check-wrapper js_Click" for="register-button">
-          <div class="check-bar"></div>
-        </label>
-        <input style="display: none;" id="register-button" type="submit" name="register-name">
+        <div class="west-team-player">
+          <h3>west team</h3>
+          <div class="player-seat"> <!-- 1人目 -->
+            <input class="player-name js−name" type="text" autocomplete="off" placeholder="Your name?" data-index="0">
+            <button class="login js-login">準備完了
+          </div>
+          <div class="player-seat"> <!-- 2人目 -->
+            <input class="player-name js−name" type="text" autocomplete="off" placeholder="Your name?" data-index="0">
+            <button class="login js-login">準備完了
+          </div>
+        </div>
+        <div class="east-team-player">
+          <h3>east team</h3>
+          <div class="player-seat"> <!-- 3人目 -->
+            <input class="player-name js−name" type="text" autocomplete="off" placeholder="Your name?" data-index="0">
+            <button class="login js-login">準備完了
+          </div>
+          <div class="player-seat"> <!-- 4人目 -->
+            <input class="player-name js−name" type="text" autocomplete="off" placeholder="Your name?" data-index="0">
+            <button class="login js-login">準備完了
+          </div>
+        </div>
       </div>
     </section>
-
-    <section id="js-ready" class="ready-fight">
-      <h2>Ready..?</h2>
-      <label id="js-send-ready" class="player-ready check-wrapper js_Check" for="player-ready">
-        <div class="check-bar"></div>
-      </label>
-      <input style="display: none;" id="player-ready" type="checkbox" name="ready">
-    </section>
-
+    <!-- カウントダウンシーン -->
     <section id="js-count" class="ready-count">
       <p id="js-count-number" class="count-number"></p>
     </section>
   </section>
 
+  <!-- ゲームシーン -->
   <section class="gamearea">
     <div class="words-area">
       <span id="js-word">programming</span>
@@ -54,8 +62,8 @@
       </div>
     </div>
   </section>
+
   <script src="./js/network.js"></script>
   <script src="./js/app.js"></script>
 </body>
-
 </html>

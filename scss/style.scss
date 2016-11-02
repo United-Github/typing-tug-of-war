@@ -51,9 +51,10 @@ h2 {
     left: 0;
     right: 0;
     margin: auto;
-    width: 600px;
-    height: 300px;
+    width: 100%;
+    // height: 300px;
   }
+
   .enter-the-game {
     background-color: $black;
     z-index: 2;
@@ -82,6 +83,12 @@ h2 {
         &:focus {
           border-color: $green;
         }
+        &::-webkit-input-placeholder {
+          color: rgba($white, 0.1); // placeholderのcolor:
+        }
+      }
+      .player-ready {
+        display: inline-block;
       }
       .register-player {
         display: inline-block;
@@ -99,16 +106,8 @@ h2 {
       }
     }
   }
-  .ready-fight {
-    background-color: $black;
-    z-index: 1;
-    .player-ready {
-      display: inline-block;
-      &:checked {
-        display: none;
-      }
-    }
-  }
+
+  // カウントダウンシーン
   .ready-count {
     background-color: $black;
     z-index: 0;
