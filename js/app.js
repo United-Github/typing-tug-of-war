@@ -8,6 +8,7 @@ registerName();
 
 function registerName() {
   $('.js-login').on('click', function(){
+    $(this).toggleClass('is-check');
     var input = $(this).parent().find('.js-name');
 
     var index = input.data('index');
