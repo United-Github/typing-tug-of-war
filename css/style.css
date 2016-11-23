@@ -79,6 +79,28 @@ h3 {
     right: 0;
     margin: auto;
     width: 100%; }
+  .ready-game .select-the-room {
+    z-index: 3;
+    background-color: #303E4D; }
+    .ready-game .select-the-room .reload {
+      margin-left: 0px; }
+      .ready-game .select-the-room .reload:active {
+        margin-left: 6px; }
+    .ready-game .select-the-room .room-name {
+      width: 600px;
+      margin: 60px auto; }
+      .ready-game .select-the-room .room-name li {
+        margin-left: 100px;
+        text-align: left;
+        padding-top: 10px;
+        padding-left: 40px;
+        transition: all .3s; }
+        .ready-game .select-the-room .room-name li:hover {
+          text-decoration: underline;
+          padding-left: 0px;
+          color: #fff; }
+        .ready-game .select-the-room .room-name li:active {
+          padding-left: 6px; }
   .ready-game .enter-the-game {
     background-color: #303E4D;
     z-index: 2; }

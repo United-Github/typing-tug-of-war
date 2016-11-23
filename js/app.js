@@ -1,10 +1,16 @@
 var game = new tugOfWar();
 var gameReadyScene = document.querySelector('#js-game-ready');
-registerName();
+selectRoom();
 
 // game.setChangeEvent('user', function(array, updateKey){
 //   console.log(array, updateKey);
 // });
+
+function selectRoom() {
+  $(".reload").on('click', function() {
+    console.log("reload");
+  });
+}
 
 function registerName() {
   $('.js-login').on('click', function(){

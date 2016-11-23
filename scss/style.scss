@@ -9,6 +9,7 @@ $blue: #2a71ed;
 $green: #33b490;
 $orange: #db8b13;
 
+
 body {
   font-family: 'Montserrat', sans-serif;
   letter-spacing: .2em;
@@ -62,7 +63,35 @@ h3 {
     width: 100%;
     // height: 300px;
   }
-
+  .select-the-room {
+    z-index: 3;
+    background-color: $black;
+    .reload {
+        margin-left: 0px;
+      &:active {
+        margin-left: 6px;
+      }
+    }
+    .room-name {
+        width: 600px;
+        margin: 60px auto;
+      li {
+        margin-left: 100px;
+        text-align: left;
+        padding-top:10px;
+        padding-left: 40px;
+        transition: all .3s;
+        &:hover {
+          text-decoration: underline;
+          padding-left: 0px;
+          color: $white;
+        }
+        &:active {
+          padding-left: 6px;
+        }
+      }
+    }
+  }
   .enter-the-game {
     background-color: $black;
     z-index: 2;
