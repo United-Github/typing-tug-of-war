@@ -1,32 +1,66 @@
-// var main = function(){
-// 	// // Initialize Firebase
-// 	// var config = {
-// 	// 	apiKey: "AIzaSyB4SrBOJXjb96oQHhufas5bU01AqJcZ6oQ",
-// 	// 	authDomain: "tug-of-war-fc1a3.firebaseapp.com",
-// 	// 	databaseURL: "https://tug-of-war-fc1a3.firebaseio.com",
-// 	// 	storageBucket: "",
-// 	// 	messagingSenderId: "69512977389"
-// 	// };
-// 	// firebase.initializeApp(config);
-// 	// console.log('初期化したよ');
-// 	// var hoge = '1';
-// }
-
 // firebase
-function tugOfWar() {
+// Keyとvalueを取得できるforInを作成
 
-	// Keyとvalueを取得できるforInを作成
-	Object.defineProperty(Object.prototype, "forIn", {
-		value: function(fn, self) {
-			self = self || this;
+Object.defineProperty(Object.prototype, "forIn", {
+	value: function(fn, self) {
+		self = self || this;
 
-			Object.keys(this).forEach(function(key, index) {
-				var value = this[key];
+		Object.keys(this).forEach(function(key, index) {
+			var value = this[key];
+			fn.call(self, key, value);
+		}, this);
+	}
+});
+function roomController() {
+	this.baseUri = "https://tug-of-war-adba1.firebaseio.com/";
+	this.roomObjList = [];
+	this.roomDataList = [[],[],[],[]];
+	for (var index = 0; index < 4; index++) {
+		this.roomObjList[index] = new Firebase(this.baseUri + "room/" + index + "/user");
+	}
 
-				fn.call(self, key, value);
-			}, this);
-		}
-	});
+	this.roomObjList.forIn(function(key, value) {
+		value.on("value", function(snapshot) {
+			changeRoomList(key, snapshot.val(), this);
+		}.bind(this));
+		value.on("child_changed", function(snapshot) {
+			changeRoomList(snapshot.key(), snapshot.val(), this);
+		}.bind(this));
+	}.bind(this));
+
+	function changeRoomList(key, value, o) {
+		o.roomDataList[key] = value;
+		$('h3[data-index='+ key +'] span').text(getNum(value));
+	}
+
+	function getNum(array) {
+		var count = 0;
+		array.forEach(function(element){
+			if (element !== "") {
+				count ++;
+			}
+		});
+		return count;
+	}
+}
+roomController.prototype.getRoomList = function() {
+
+}
+
+function tugOfWar($id) {
+
+	// Object.defineProperty(Object.prototype, "forIn", {
+	// 	value: function(fn, self) {
+	// 		self = self || this;
+
+	// 		Object.keys(this).forEach(function(key, index) {
+	// 			var value = this[key];
+
+	// 			fn.call(self, key, value);
+	// 		}, this);
+	// 	}
+	// });
+
 
 	// 更新時のイベント関数配列(ユーザー用)
 	this.changeEvent = [];
@@ -39,14 +73,14 @@ function tugOfWar() {
 	// Userの番号
 	this.userIndex = -1;
 	// 元のURI
-	this.baseUri = "https://tug-of-war-adba1.firebaseio.com/";
+	this.baseUri = "https://tug-of-war-adba1.firebaseio.com/room/" + $id + "/";
 
 	// 全員が更新が変わったときのイベント
 	this.changeReadyEvent = function(ready){};
 
 	// FireBaseオブジェクトのインスタンス化
 	this.fire['user'] = new Firebase(this.baseUri + "user");
-	this.fire['typing'] = new Firebase(this.baseUri + "typing/total");
+	this.fire['typing'] = new Firebase(this.baseUri + "typing");
 	this.fire['ready'] = new Firebase(this.baseUri + "ready");
 
 	// fireのイベント登録
@@ -100,6 +134,7 @@ function tugOfWar() {
 
 	}.bind(this));
 
+	// fireのイベント登録
 	// 削除時の処理
 	$(window).unload(function() {
 		this.logoutPlayer();
@@ -124,6 +159,7 @@ function tugOfWar() {
 		});
 	}
 
+		console.log(432);
 }
 	// チェンジイベントの登録 (データ名, イベント関数)
 	tugOfWar.prototype.setChangeEvent = function(key, func) {
@@ -186,19 +222,10 @@ function tugOfWar() {
 			this.fire['ready'].update({[this.userIndex] : status});
 		}
 	}
+	tugOfWar.prototype.initialize = function(){
+		this.logoutPlayer();
+	}
 
 $(function (){
-	// var game = new tugOfWar();
-	// game.setChangeEvent('user', function(array, updateKey){
-	// 	console.log(array, updateKey);
-	// });
-	// $(".js_Click").on("click", function() {
-	// 	console.log(game.getElement('user'));
-	// 	// console.log(game.test());
-	// 	console.log(game.loginPlayer(1,"tanaka"));
-	// });
-	// $(".js_Check").on("click", function() {
-	// 	game.setStatusReady(true);
-	// 	// console.log(game.logoutPlayer());
-	// });
+	var hoge = new roomController();
 })

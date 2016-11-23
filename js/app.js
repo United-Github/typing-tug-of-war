@@ -1,4 +1,4 @@
-var game = new tugOfWar();
+var game;
 var gameReadyScene = document.querySelector('#js-game-ready');
 selectRoom();
 
@@ -7,12 +7,21 @@ selectRoom();
 // });
 
 function selectRoom() {
-  $(".reload").on('click', function() {
-    console.log("reload");
+  $(".room-name h3").on('click', function(){
+      if ($(this).children('span').text() === "4") {
+        return ;
+      }
+      var loginScene = document.getElementById('js-scene-room');
+      $('#js-scene-room').remove();
+      loginScene.style.opacity = '0';
+      registerName($(this).data('index'));
   });
 }
 
-function registerName() {
+function registerName($id) {
+  if (game === undefined) {
+    game = new tugOfWar($id);
+  }
   $('.js-login').on('click', function(){
     $(this).toggleClass('is-check');
     var input = $(this).parent().parent().find('.js-name');
@@ -194,6 +203,9 @@ function gameStart() {
         // 同点
         console.log('同点！');
       }
+      game.initialize();
+      delete game;
+      game = undefined;
     }, 1200);
   }
 
