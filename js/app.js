@@ -8,9 +8,9 @@ selectRoom();
 
 function selectRoom() {
   $(".room-name h3").on('click', function(){
-      if ($(this).children('span').text() === "4") {
-        return ;
-      }
+      // if ($(this).children('span').text() === "4") {
+      //   return ;
+      // }
       var loginScene = document.getElementById('js-scene-room');
       $('#js-scene-room').remove();
       loginScene.style.opacity = '0';
